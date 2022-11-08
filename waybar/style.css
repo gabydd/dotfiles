@@ -1,0 +1,57 @@
+@import "mocha.css";
+
+* {
+    font-family: "Roboto, Helvetica, Arial, sans-serif, Font Awesome 6 Free Solid,";
+    font-size: 14px;
+}
+
+window#waybar {
+  background-color: transparent;
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd {
+  padding: 3px 10px;
+  color: @text;
+  background-color: @base;
+}
+
+#window,
+#workspaces {
+    margin: 0 2px;
+}
+
+#workspaces {
+  background-color: @base;
+}
+
+#workspaces button.active {
+  color: @mauve;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @red;
+}

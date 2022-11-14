@@ -66,10 +66,11 @@ output * bg ~/Pictures/base.png fill
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+c exec google-chrome-stable
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -134,6 +135,10 @@ output * bg ~/Pictures/base.png fill
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+    bindsym $mod+Alt+h move workspace to output left
+    bindsym $mod+Alt+l move workspace to output right
+    bindsym $mod+Alt+k move workspace to output up
+    bindsym $mod+Alt+j move workspace to output down
 #
 # Layout stuff:
 #
@@ -206,9 +211,10 @@ bar swaybar_command waybar
 default_border none
 
 exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec waybar
 exec mako
-exec nm-applet
 exec blueman-applet
-exec_always ~/.config/hypr/scripts/import-gsettingsinclude /etc/sway/config.d/*
+exec nm-applet
+exec_always ~/.config/hypr/scripts/import-gsettings
+include /etc/sway/config.d/*

@@ -69,7 +69,7 @@ output * bg ~/Pictures/base.png fill
     bindsym $mod+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+r exec $menu
     bindsym $mod+c exec google-chrome-stable
     bindsym $mod+o exec obsidian
     bindsym $mod+d exec discord-canary

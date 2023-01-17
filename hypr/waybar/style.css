@@ -1,12 +1,12 @@
-@import "mocha.css";
+@import "colibri.css";
 
 * {
-    font-family: "Roboto, Helvetica, Arial, sans-serif, Font Awesome 6 Free Solid,";
-    font-size: 14px;
+  font-family: "Roboto, Helvetica, Arial, sans-serif, Font Awesome 6 Free Solid,";
+  font-size: 14px;
 }
 
 window#waybar {
-  background-color: transparent;
+  background-color: @bg;
   transition-property: background-color;
   transition-duration: .5s;
 }
@@ -31,27 +31,18 @@ window#waybar.hidden {
 #mpd {
   padding: 3px 10px;
   color: @text;
-  background-color: @base;
 }
 
 #window,
 #workspaces {
-    margin: 0 2px;
+  margin: 0 2px;
 }
 
-#workspaces {
-  background-color: @base;
-}
-
-#workspaces button.active {
-  color: @mauve;
-}
-
-#tray > .passive {
+#tray>.passive {
   -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
   -gtk-icon-effect: highlight;
   background-color: @red;
 }

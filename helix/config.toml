@@ -1,9 +1,7 @@
-theme = "catppuccin_mocha"
-
 [editor]
-line-number = "relative"
-cursorline = true
-color-modes = true
 auto-save = true
-true-color = true
-indent-guides = { render = true }
+mouse = false
+cursorline = true
+
+[editor.soft-wrap]
+enable = true

@@ -71,8 +71,14 @@ output * bg ~/Pictures/base.png fill
     # Start your launcher
     bindsym $mod+m exec $menu
     bindsym $mod+c exec google-chrome-stable
+    bindsym $mod+f exec firefox-developer-edition
     bindsym $mod+o exec obsidian
     bindsym $mod+d exec discord-canary
+    bindsym $mod+y exec grim -g "$(slurp)" - | wl-copy
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioPlay exec playerctl play-pause
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

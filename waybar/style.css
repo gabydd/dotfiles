@@ -1,4 +1,7 @@
-@import "colibri.css";
+@define-color bg #3b224c;
+
+@define-color text #ffffff;
+@define-color red #f47868;
 
 * {
   font-family: "Roboto, Helvetica, Arial, sans-serif, Font Awesome 6 Free Solid,";

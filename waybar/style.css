@@ -41,6 +41,10 @@ window#waybar.hidden {
   margin: 0 2px;
 }
 
+#workspaces button {
+  color: @text;
+}
+
 #tray>.passive {
   -gtk-icon-effect: dim;
 }

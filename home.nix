@@ -135,6 +135,13 @@ in
       userName = "gabydd";
       userEmail = "gabydinnerdavid@gmail.com";
     };
+    programs.gh = {
+      enable = true;
+      settings = {
+        editor = "hx";
+        git_protocol = "https";
+      };
+    };
     programs.fish.enable = true;
     programs.kitty.enable = true;
   };

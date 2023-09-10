@@ -43,6 +43,7 @@
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+  hardware.opengl.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

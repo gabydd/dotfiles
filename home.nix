@@ -29,6 +29,9 @@ in
     ];
 
 
+    home.sessionVariables = {
+      EDITOR = "hx";
+    };
     wayland.windowManager.sway = {
       enable = true; 
       config = {
@@ -134,6 +137,7 @@ in
       enable = true;
       userName = "gabydd";
       userEmail = "gabydinnerdavid@gmail.com";
+      extraConfig.core.editor = "hx";
     };
     programs.gh = {
       enable = true;

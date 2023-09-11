@@ -1,11 +1,14 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, ... }: 
+let helix = import /home/gaby/src/helix/driver;
+in
 {
   imports =
     [
-      ./hardware-configuration.nix
       ./home.nix
     ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.overlays = [ helix.overlays.default ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -23,23 +26,30 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
+  programs.fish.enable = true;
+  # environment.systemPackages = [ helix ];
+  
 
   users.users.gaby = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.fish;
   };
 
   fonts = {
     fonts = with pkgs; [
       iosevka
       roboto
+      noto-fonts
       font-awesome
       noto-fonts-emoji
+      (nerdfonts.override { fonts = ["Iosevka"]; })
     ];
     fontconfig.defaultFonts = {
       monospace = ["Iosevka"];
     };
   };
+
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;

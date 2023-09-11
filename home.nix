@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
 in
@@ -17,15 +17,16 @@ in
       grim
       slurp
       wf-recorder
-      wofi
+      wmenu
       imv
       chromium
       ripgrep
       skim
       xdg-utils
       asciinema
-      fish
       nil
+      firefox-devedition
+      dmenu
     ];
 
 
@@ -36,10 +37,24 @@ in
       enable = true; 
       config = {
         modifier = "Mod4";
-        terminal = "kitty"; 
+        terminal = "alacritty"; 
         bars = [];
         window = {
           titlebar = false;
+        };
+        menu = "dmenu_path | wmenu | xargs swaymsg exec --";
+        input."type:keyboard".xkb_options = "caps:escape";
+        keybindings = let
+          mod = "Mod4";
+        in lib.mkOptionDefault {
+          "${mod}+q" = "kill";
+          "${mod}+f" = "exec firefox";
+          "${mod}+c" = "exec chromuim";
+          "${mod}+y" = "exec grim -g \"$(slurp)\" - wl-copy";
+          "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
+          "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
+          "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          "XF86AudioPlay" = "exec playerctl play-pause";
         };
       };
       extraConfig = ''
@@ -132,7 +147,6 @@ in
         }
       ];
     };
-    programs.firefox.enable = true;
     programs.git = {
       enable = true;
       userName = "gabydd";
@@ -146,7 +160,14 @@ in
         git_protocol = "https";
       };
     };
-    programs.fish.enable = true;
-    programs.kitty.enable = true;
+    # programs.fish.enable = true;
+    services.mako.enable = true;
+    programs.alacritty = {
+      enable = true;
+      settings = {
+        font.size = 17;
+        window.dynamic_padding = true;
+      };
+    };
   };
 }

@@ -1,3 +1,4 @@
+theme = "github_dark"
 [editor]
 auto-save = true
 mouse = false

@@ -11,6 +11,18 @@ in
     home.stateVersion = "23.05";
     home.packages = with pkgs; [
       helix
+      typst-lsp
+      cachix
+      zathura
+      gnome.adwaita-icon-theme
+      pavucontrol
+      pulseaudio
+      playerctl
+      htop
+      imagemagick
+      playonlinux
+      hunspell
+      libreoffice-fresh
       wget
       swaylock
       wl-clipboard
@@ -27,6 +39,8 @@ in
       nil
       firefox-devedition
       dmenu
+      nodePackages.typescript-language-server
+      nodejs
     ];
 
 
@@ -160,14 +174,52 @@ in
         git_protocol = "https";
       };
     };
-    # programs.fish.enable = true;
+    programs.fish.enable = true;
     services.mako.enable = true;
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     programs.alacritty = {
       enable = true;
       settings = {
         font.size = 17;
         window.dynamic_padding = true;
+        colors = {
+          primary = {
+            background = "0x0d1117";
+            foreground = "0xb3b1ad";
+          };
+          normal = {
+            black =   "0x484f58";
+            red =     "0xff7b72";
+            green =   "0x3fb950";
+            yellow =  "0xd29922";
+            blue =    "0x58a6ff";
+            magenta = "0xbc8cff";
+            cyan =    "0x39c5cf";
+            white =   "0xb1bac4";
+          };
+          bright = {
+            black =   "0x6e7681";
+            red =     "0xffa198";
+            green =   "0x56d364";
+            yellow =  "0xe3b341";
+            blue =    "0x79c0ff";
+            magenta = "0xd2a8ff";
+            cyan =    "0x56d4dd";
+            white =   "0xf0f6fc";
+          };
+          indexed_colors = [
+            { index = 16; color = "0xd18616"; }
+            { index = 17; color = "0xffa198"; }
+          ];
+        };
       };
     };
+
+    xdg.configFile."helix/config.toml".source = ./helix/config.toml;
+    xdg.configFile."helix/languages.toml".source = ./helix/languages.toml;
+    xdg.configFile."helix/runtime/queries/typst".source = /home/gaby/src/tree-sitter-typst/queries;
   };
 }

@@ -1,7 +1,7 @@
-@define-color bg #3b224c;
+@define-color bg #0d1117;
 
-@define-color text #ffffff;
-@define-color red #f47868;
+@define-color text #c9d1d9;
+@define-color red #ffdcd7;
 
 * {
   font-family: "Roboto, Helvetica, Arial, sans-serif, Font Awesome 6 Free Solid,";

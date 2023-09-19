@@ -7,14 +7,19 @@ let helix = import /home/gaby/src/helix/driver;
   ) {
     src =  (fetchGit {url = "https://github.com/nvarner/typst-lsp.git";});
   }).defaultNix;
-in
+  nix-ros-overlay = builtins.fetchTarball {
+        url = "https://github.com/lopsided98/nix-ros-overlay/archive/c060df9b683e87b793ca24b398aad6630b4fee9d.tar.gz";
+      };
+  in
 {
   imports =
     [
       ./home.nix
+      (nix-ros-overlay + "/modules")
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [ "root" "gaby" ];
   nixpkgs.overlays = [ helix.overlays.default (self: super: {typst-lsp = typst-lsp.packages."x86_64-linux".default;}) ];
 
   boot.loader.systemd-boot.enable = true;
@@ -72,6 +77,7 @@ in
   services.printing.enable = true;
   services.dbus.enable = true;
   security.polkit.enable = true;
+  hardware.enableRedistributableFirmware = true;
 
   xdg.portal = {
     enable = true;
@@ -83,10 +89,18 @@ in
     enable = true;
     ensureDatabases = [ "promptly" ];
   };
+  services.ros2 = {
+    enable = true;
+    systemPackages = p: with p; [ ros-core ];
+  };
 
   nixpkgs.config.allowUnfree = true;
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1v"
+  ];
 
   system.stateVersion = "23.05";
 }

@@ -41,6 +41,18 @@ in
       dmenu
       nodePackages.typescript-language-server
       nodejs
+      python3
+      jupyter
+      elmPackages.elm-language-server
+      elmPackages.elm-review
+      elmPackages.elm-format
+      elmPackages.elm
+      colcon
+      cmake
+      gnumake
+      gcc
+      swiProlog
+      vscode
     ];
 
 
@@ -64,7 +76,7 @@ in
           "${mod}+q" = "kill";
           "${mod}+f" = "exec firefox";
           "${mod}+c" = "exec chromuim";
-          "${mod}+y" = "exec grim -g \"$(slurp)\" - wl-copy";
+          "${mod}+y" = "exec grim -g \"$(slurp)\" - | wl-copy";
           "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
           "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
           "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";

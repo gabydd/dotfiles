@@ -1,0 +1,10 @@
+[language-server.elm-language-server]
+command = "node"
+args = ["/home/gaby/src/elm-language-server/out/node/index.js"]
+[language-server.elm-language-server.config.elmLS]
+elmReviewDiagnostics = "warning"
+elmReviewPath = "/home/gaby/.nix-profile/bin/elm-review"
+
+[[language]]
+name = "perl"
+file-types = ["pm", "t"]

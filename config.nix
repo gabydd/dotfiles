@@ -3,19 +3,15 @@ let helix = import /home/gaby/src/helix/driver;
     typst-lsp = (import (
     fetchTarball {
       url = "https://github.com/edolstra/flake-compat/archive/12c64ca55c1014cdc1b16ed5a804aa8576601ff2.tar.gz";
-      sha256 = "0jm6nzb83wa6ai17ly9fzpqc40wg1viib8klq8lby54agpl213w5"; }
+    }
   ) {
-    src =  (fetchGit {url = "https://github.com/nvarner/typst-lsp.git";});
+    src =  (fetchGit {url = "https://github.com/nvarner/typst-lsp.git"; rev = "cc7bad9bd9764bfea783f2fab415cb3061fd8bff";});
   }).defaultNix;
-  nix-ros-overlay = builtins.fetchTarball {
-        url = "https://github.com/lopsided98/nix-ros-overlay/archive/c060df9b683e87b793ca24b398aad6630b4fee9d.tar.gz";
-      };
   in
 {
   imports =
     [
       ./home.nix
-      (nix-ros-overlay + "/modules")
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -43,7 +39,7 @@ let helix = import /home/gaby/src/helix/driver;
 
   users.users.gaby = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "dialout" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
 
@@ -88,10 +84,6 @@ let helix = import /home/gaby/src/helix/driver;
   services.postgresql = {
     enable = true;
     ensureDatabases = [ "promptly" ];
-  };
-  services.ros2 = {
-    enable = true;
-    systemPackages = p: with p; [ ros-core ];
   };
 
   nixpkgs.config.allowUnfree = true;

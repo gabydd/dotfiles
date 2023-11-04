@@ -1,3 +1,3 @@
-# hyprland, waybar, mako, kitty and helix dotfiles
+# nixos helix and sway
 
-copy into your .config directory
+needs to be switched to a flake

@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
+  unstable = import
+    (builtins.fetchTarball "https://github.com/nixos/nixpkgs/tarball/54de1010e7488d83d7817f170783a0ed42d86cc4")
+    # reuse the current configuration
+    { config = config.nixpkgs.config; };
 in
 {
   imports = [
@@ -47,17 +51,37 @@ in
       elmPackages.elm-review
       elmPackages.elm-format
       elmPackages.elm
-      colcon
-      cmake
-      gnumake
-      gcc
       swiProlog
       vscode
+      distrobox
+      unzip
+      gnumake
+      gcc
+      openjdk
+      racket
+      unstable.curl
+      unstable.arduino
+      unstable.arduino-cli
+      screen
+      esptool
+      python310Packages.pyserial
+      inetutils
+      docker
+      chicken
+      chez
+      rlwrap
+      gdb
+      lazygit
+      nasm
+      clang-tools_16
+      hexyl
+      imhex
     ];
 
 
     home.sessionVariables = {
       EDITOR = "hx";
+      STEEL_HOME = "/home/gaby/.steel";
     };
     wayland.windowManager.sway = {
       enable = true; 
@@ -230,8 +254,8 @@ in
       };
     };
 
-    xdg.configFile."helix/config.toml".source = ./helix/config.toml;
-    xdg.configFile."helix/languages.toml".source = ./helix/languages.toml;
-    xdg.configFile."helix/runtime/queries/typst".source = /home/gaby/src/tree-sitter-typst/queries;
+    xdg.configFile."helix" = {
+      source = ./helix;
+    };
   };
 }

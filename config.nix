@@ -1,22 +1,7 @@
 { config, pkgs, ... }: 
-let helix = import /home/gaby/src/helix/driver;
-    typst-lsp = (import (
-    fetchTarball {
-      url = "https://github.com/edolstra/flake-compat/archive/12c64ca55c1014cdc1b16ed5a804aa8576601ff2.tar.gz";
-    }
-  ) {
-    src =  (fetchGit {url = "https://github.com/nvarner/typst-lsp.git"; rev = "cc7bad9bd9764bfea783f2fab415cb3061fd8bff";});
-  }).defaultNix;
-  in
 {
-  imports =
-    [
-      ./home.nix
-    ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "gaby" ];
-  nixpkgs.overlays = [ helix.overlays.default (self: super: {typst-lsp = typst-lsp.packages."x86_64-linux".default;}) ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -92,6 +77,7 @@ let helix = import /home/gaby/src/helix/driver;
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1v"
+    "openssl-1.1.1w"
   ];
 
   system.stateVersion = "23.05";

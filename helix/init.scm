@@ -1,4 +1,3 @@
-(require-builtin steel/random as rand::)
 (require-builtin helix/core/static as helix.static.)
 (require-builtin helix/core/typable as helix.)
 

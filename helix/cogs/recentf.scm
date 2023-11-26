@@ -19,9 +19,6 @@
   (if (editor-doc-exists? editor doc-id) (editor->get-document editor doc-id) #f))
 
 (define (read-recent-files)
-  (unless (path-exists? ".helix")
-    (create-directory! ".helix"))
-
   (cond
     ;; We're just storing these as strings with the quotes still there, so that we
     ;; can call `read` on them accordingly
@@ -64,11 +61,12 @@
 
 (define (flush-recent-files)
   ;; Open the output file, and then we'll write all the recent files down
-  (let ([output-file (open-output-file RECENTF-FILE)])
-    (map (lambda (line)
-           (when (string? line)
-             (write-line! output-file line)))
-         *recent-files*)))
+  (and (path-exists? ".helix")
+    (let ([output-file (open-output-file RECENTF-FILE)])
+      (map (lambda (line)
+             (when (string? line)
+               (write-line! output-file line)))
+           *recent-files*))))
 
 (define (helix-picker! cx pick-list)
   (push-component! cx (Picker::new pick-list)))

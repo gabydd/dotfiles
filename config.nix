@@ -81,5 +81,7 @@
   ];
 
   system.stateVersion = "23.05";
+
+  documentation.dev.enable = true;
 }
 

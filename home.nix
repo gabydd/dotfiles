@@ -26,15 +26,18 @@
     unstable.chromium
     ripgrep
     skim
+    fzf
     xdg-utils
     asciinema
     unstable.nil
     unstable.firefox-devedition
     dmenu
     nodePackages.typescript-language-server
+    nodePackages.pyright
     nodejs
-    unstable.python3
-    unstable.jupyter
+    unstable.python311
+    unstable.python311Packages.notebook
+    unstable.python311Packages.ruff-lsp
     elmPackages.elm-language-server
     elmPackages.elm-review
     elmPackages.elm-format
@@ -52,7 +55,7 @@
     unstable.arduino-cli
     screen
     esptool
-    unstable.python3Packages.pyserial
+    unstable.python311Packages.pyserial
     inetutils
     docker
     chicken
@@ -65,6 +68,9 @@
     hexyl
     imhex
     unstable.eza
+    unstable.jdt-language-server
+    man-pages
+    man-pages-posix
   ];
 
 
@@ -94,6 +100,12 @@
         "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
         "XF86AudioPlay" = "exec playerctl play-pause";
+        "${mod}+0" = "workspace number 10";
+        "${mod}+Shift+0" = "move container to workspace number 10";
+        "${mod}+Alt+h" = "move workspace to output left";
+        "${mod}+Alt+l" = "move workspace to output righ";
+        "${mod}+Alt+k" = "move workspace to output up";
+        "${mod}+Alt+j" = "move workspace to output down";
       };
     };
     extraConfig = ''

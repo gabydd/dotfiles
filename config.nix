@@ -20,6 +20,7 @@
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
   programs.fish.enable = true;
+  programs.dconf.enable = true;
   
 
   users.users.gaby = {
@@ -29,7 +30,7 @@
   };
 
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       iosevka
       corefonts
       roboto
@@ -38,7 +39,7 @@
       font-awesome
       (nerdfonts.override { fonts = ["Iosevka"]; })
     ];
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     fontconfig.defaultFonts = {
       monospace = ["Iosevka"];
     };
@@ -64,6 +65,7 @@
     enable = true;
     wlr.enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
+    config.sway.default = ["wlr" "gtk"];
   };
 
   services.postgresql = {
@@ -80,7 +82,7 @@
     "openssl-1.1.1w"
   ];
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   documentation.dev.enable = true;
 }

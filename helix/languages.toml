@@ -20,3 +20,6 @@ args = ["--stdio"]
 [language-server.ruff]
 command = "ruff-lsp"
 config = { settings = { run = "onSave" } }
+
+[language-server.jdtls]
+command = "jdt-language-server"

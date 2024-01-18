@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
   home.packages = with pkgs; [
     helix
     typst-lsp
@@ -71,15 +71,31 @@
     unstable.jdt-language-server
     man-pages
     man-pages-posix
+    steel
+    ocaml
+    ocamlPackages.ocaml-lsp
+    ocamlPackages.ocamlformat
+    ocamlPackages.utop
   ];
 
 
   home.sessionVariables = {
     EDITOR = "hx";
-    STEEL_HOME = "/home/gaby/.steel";
+    STEEL_HOME = "${pkgs.steel}/lib";
+  };
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
   };
   wayland.windowManager.sway = {
     enable = true; 
+    wrapperFeatures.gtk = true;
     config = {
       modifier = "Mod4";
       terminal = "alacritty"; 

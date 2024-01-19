@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     helix = {
-      url = "github:gabydd/helix/driver";
+      url = "github:the-mikedavis/helix/driver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     steel = {

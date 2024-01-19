@@ -3,6 +3,7 @@ theme = "github_dark"
 auto-save = true
 mouse = false
 cursorline = true
+true-color = true
 
 [editor.soft-wrap]
 enable = true

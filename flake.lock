@@ -3,18 +3,12 @@
     "crane": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "flake-utils": [
-          "helix",
-          "flake-utils"
-        ],
+        "flake-utils": "flake-utils",
         "nixpkgs": [
           "helix",
           "nixpkgs"
         ],
-        "rust-overlay": [
-          "helix",
-          "rust-overlay"
-        ]
+        "rust-overlay": "rust-overlay"
       },
       "locked": {
         "lastModified": 1688772518,
@@ -84,6 +78,24 @@
         "systems": "systems"
       },
       "locked": {
+        "lastModified": 1705309234,
+        "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
         "lastModified": 1689068808,
         "narHash": "sha256-6ixXo3wt24N/melDWjq70UuHQLxGV8jZvooRanIHXw0=",
         "owner": "numtide",
@@ -97,9 +109,9 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
+    "flake-utils_3": {
       "inputs": {
-        "systems": "systems_2"
+        "systems": "systems_3"
       },
       "locked": {
         "lastModified": 1694529238,
@@ -115,9 +127,9 @@
         "type": "github"
       }
     },
-    "flake-utils_3": {
+    "flake-utils_4": {
       "inputs": {
-        "systems": "systems_3"
+        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1694529238,
@@ -157,22 +169,22 @@
     "helix": {
       "inputs": {
         "crane": "crane",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay"
+        "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1700973036,
-        "narHash": "sha256-xOGruWndq08Nz4wTyONttjPdlVRn97t+hmhCabGNsCY=",
-        "owner": "gabydd",
+        "lastModified": 1705589065,
+        "narHash": "sha256-4d7F60JGXQwvjuYKCFBF1NpiBvV1Xhf32RuoZlNEzT0=",
+        "owner": "the-mikedavis",
         "repo": "helix",
-        "rev": "25ead6f97951e7f3d7ce40e610a82cae22aea052",
+        "rev": "0038180ad0dcbf5136518d51578177f64e235af1",
         "type": "github"
       },
       "original": {
-        "owner": "gabydd",
+        "owner": "the-mikedavis",
         "ref": "driver",
         "repo": "helix",
         "type": "github"
@@ -278,6 +290,33 @@
       "inputs": {
         "flake-utils": [
           "helix",
+          "crane",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "helix",
+          "crane",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1705630663,
+        "narHash": "sha256-f+kcR17ZtwMyCEtNAfpD0Mv6qObNKoJ41l+6deoaXi8=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "47cac072a313d9cce884b9ea418d2bf712fa23dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "flake-utils": [
+          "helix",
           "flake-utils"
         ],
         "nixpkgs": [
@@ -301,7 +340,7 @@
     },
     "steel": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "gitignore": "gitignore",
         "nixpkgs": "nixpkgs_2"
       },
@@ -364,6 +403,21 @@
         "type": "github"
       }
     },
+    "systems_4": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "typst": {
       "flake": false,
       "locked": {
@@ -400,7 +454,7 @@
     "typst-lsp": {
       "inputs": {
         "fenix": "fenix",
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "typst-lsp",
           "fenix",

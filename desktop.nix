@@ -36,19 +36,19 @@ in {
     settings = {
         "sr.ht" = {
           environment = "production";
-          global-domain = "sr.${fqdn}";
-          origin = "https://sr.${fqdn}";
+          global-domain = "${fqdn}";
+          origin = "https://${fqdn}";
           # Produce keys with srht-keygen from sourcehut.coresrht.
           network-key = "${secretsPath}/network-key";
           service-key = "${secretsPath}/service-key";
         };
         "git.sr.ht" = {
-          origin = "https://git.sr.${fqdn}";
-          oauth-client-id = "sr.${fqdn}";
+          origin = "https://git.${fqdn}";
+          oauth-client-id = "${fqdn}";
           oauth-client-secret = "${secretsPath}/oauth-client-secret";
         };
         "meta.sr.ht" = {
-          origin = "https://meta.sr.${fqdn}";
+          origin = "https://meta.${fqdn}";
         };
         webhooks.private-key= "${secretsPath}/webhook-key";
         mail = {
@@ -60,9 +60,9 @@ in {
     };
   };
 
-  security.acme.certs."sr.${fqdn}".extraDomainNames = [
-    "meta.sr.${fqdn}"
-    "git.sr.${fqdn}"
+  security.acme.certs."${fqdn}".extraDomainNames = [
+    "meta.${fqdn}"
+    "git.${fqdn}"
   ];
 
   security.acme.acceptTerms = true;
@@ -82,10 +82,14 @@ in {
 
     # Settings to setup what certificates are used for which endpoint.
     virtualHosts = {
-      "${fqdn}".enableACME = true;
+      "${fqdn}" = {
+        enableACME = true;
+        forceSSL = true;
+        root = "/var/www/site";
+      };
       "sr.${fqdn}".enableACME = true;
-      "meta.sr.${fqdn}".enableACME = true;
-      "git.sr.${fqdn}".enableACME = true;
+      "meta.${fqdn}".enableACME = true;
+      "git.${fqdn}".enableACME = true;
     };
   };
   services.postfix = {

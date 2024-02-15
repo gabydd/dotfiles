@@ -22,12 +22,14 @@ in {
     domain = "dev";
     networkmanager.enable = true;
     networkmanager.wifi.powersave = false;
-    # change ssh port from 22
     firewall.allowedTCPPorts = [ 22 80 443 ];
   };
   services.sourcehut = {
     enable = true;
-    git.enable = true;
+    git = {
+      enable = true;
+      user = "git";
+    };
     meta.enable = true;
     nginx.enable = true;
     postfix.enable = true;
@@ -105,16 +107,9 @@ in {
     extraGroups = [ "wheel" "networkmanager" "dialout" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1v"
-    "openssl-1.1.1w"
-  ];
 
   system.stateVersion = "23.11";
   services.openssh.enable = true;
-  services.printing.enable = true;
-  services.dbus.enable = true;
-  security.polkit.enable = true;
   hardware.enableRedistributableFirmware = true;
   programs.git = {
     enable = true;
@@ -135,13 +130,7 @@ in {
     gnumake
     gcc
     openjdk
-    unstable.curl
     inetutils
-    docker
-    gdb
-    fasm
-    hexyl
-    unstable.eza
     unstable.nil
     gnupg
   ];

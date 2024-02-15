@@ -1,4 +1,4 @@
-theme = "github_dark"
+theme = "tokyostorm"
 [editor]
 auto-save = true
 mouse = false

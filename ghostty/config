@@ -1,0 +1,9 @@
+window-decoration = false
+theme = tokyonight-storm
+window-padding-balance = true
+font-size = 16
+gtk-single-instance = true
+gtk-titlebar = false
+window-padding-y = 0
+window-theme = dark
+confirm-close-surface = false

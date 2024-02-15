@@ -11,14 +11,11 @@
       url = "github:the-mikedavis/helix/driver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    steel = {
-      url = "github:mattwparas/steel";
-    };
-    typst-lsp = {
-      url = "github:gabydd/typst-lsp";
+    ghostty = {
+      url = "git+ssh://git@github.com/mitchellh/ghostty";
     };
   };
-  outputs = {self, nixpkgs, home-manager, helix, typst-lsp, steel, ... }@inputs: 
+  outputs = {self, nixpkgs, home-manager, helix, ghostty, ... }@inputs: 
   let
     system = "x86_64-linux";
     pkgs-unstable = import inputs.unstable { config.allowUnfree = true; system = system; };
@@ -28,8 +25,7 @@
         overlays = [
           helix.overlays.default
           (_final: _prev: {
-            typst-lsp = typst-lsp.packages.${system}.default;
-            steel = steel.defaultPackage.${system};
+            ghostty = ghostty.packages.${system}.default;
           })
           (_final: _prev: {
             unstable = pkgs-unstable;

@@ -37,11 +37,12 @@
       noto-fonts
       noto-fonts-cjk
       font-awesome
+      commit-mono
       (nerdfonts.override { fonts = ["Iosevka"]; })
     ];
     enableDefaultPackages = true;
     fontconfig.defaultFonts = {
-      monospace = ["Iosevka"];
+      monospace = ["CommitMono"];
     };
   };
 
@@ -60,6 +61,19 @@
   services.dbus.enable = true;
   security.polkit.enable = true;
   hardware.enableRedistributableFirmware = true;
+  services.xserver = {
+  enable = true;
+  autorun = false;
+  displayManager = {
+    lightdm.enable = true;
+  };
+  displayManager.defaultSession = "none+i3";
+  windowManager = {
+    i3 = {
+      enable = true;
+    };
+  };
+};
 
   xdg.portal = {
     enable = true;

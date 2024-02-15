@@ -4,6 +4,8 @@
   home.packages = with pkgs; [
     helix
     typst-lsp
+    typst
+    typstfmt
     cachix
     zathura
     gnome.adwaita-icon-theme
@@ -71,17 +73,20 @@
     unstable.jdt-language-server
     man-pages
     man-pages-posix
-    steel
     ocaml
     ocamlPackages.ocaml-lsp
     ocamlPackages.ocamlformat
     ocamlPackages.utop
+    ghostty
+    unstable.cargo
+    unstable.rustc
+    unstable.rustfmt
+    unstable.rust-analyzer
   ];
 
 
   home.sessionVariables = {
     EDITOR = "hx";
-    STEEL_HOME = "${pkgs.steel}/lib";
   };
   gtk = {
     enable = true;
@@ -98,18 +103,20 @@
     wrapperFeatures.gtk = true;
     config = {
       modifier = "Mod4";
-      terminal = "alacritty"; 
+      terminal = "ghostty"; 
       bars = [];
       window = {
         titlebar = false;
       };
       menu = "dmenu_path | wmenu | xargs swaymsg exec --";
       input."type:keyboard".xkb_options = "caps:escape";
+      input."type:keyboard".xkb_layout = "us";
+      input."type:keyboard".xkb_variant = ",colemak_dh";
       keybindings = let
         mod = "Mod4";
       in lib.mkOptionDefault {
         "${mod}+q" = "kill";
-        "${mod}+f" = "exec firefox";
+        "${mod}+f" = "exec firefox-devedition";
         "${mod}+c" = "exec chromuim";
         "${mod}+y" = "exec grim -g \"$(slurp)\" - | wl-copy";
         "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
@@ -277,5 +284,8 @@
 
   xdg.configFile."helix" = {
     source = ./helix;
+  };
+  xdg.configFile."ghostty" = {
+    source = ./ghostty;
   };
 }

@@ -1,7 +1,7 @@
 {
   imports =
     [
-      ./laptop/hardware-configuration.nix
+      ./desktop/hardware-configuration.nix
       ./config.nix
     ];
 }

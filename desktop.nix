@@ -65,6 +65,7 @@ in {
   security.acme.certs."${fqdn}".extraDomainNames = [
     "meta.${fqdn}"
     "git.${fqdn}"
+    "notes.${fqdn}"
   ];
 
   security.acme.acceptTerms = true;
@@ -89,6 +90,12 @@ in {
         forceSSL = true;
         root = "/var/www/site";
       };
+      "notes.${fqdn}" = {
+        enableACME = true;
+        forceSSL = true;
+        root = "/var/www/notes";
+      };
+
       "sr.${fqdn}".enableACME = true;
       "meta.${fqdn}".enableACME = true;
       "git.${fqdn}".enableACME = true;
@@ -119,6 +126,12 @@ in {
       core.editor = "hx";
     };
   };
+  # services.cron = {
+  #   enable = true;
+  #   systemCronJobs = [
+  #     "*/1 * * * * root /home/gaby/src/scripts/ddns"
+  #   ];
+  # };
   environment.systemPackages = with pkgs; [
     helix
     cachix

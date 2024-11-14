@@ -1,14 +1,18 @@
 { config, lib, pkgs, ... }:
 {
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
   home.packages = with pkgs; [
+    ghostty
+    platformio
+    zig
+    zls
     helix
     typst-lsp
     typst
     typstfmt
-    cachix
+    unstable.cachix
     zathura
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
     pavucontrol
     pulseaudio
     playerctl
@@ -22,7 +26,7 @@
     wl-clipboard
     grim
     slurp
-    wf-recorder
+    # wf-recorder
     wmenu
     imv
     unstable.chromium
@@ -32,24 +36,27 @@
     xdg-utils
     asciinema
     unstable.nil
-    unstable.firefox-devedition
+    firefox-devedition-bin
     dmenu
     nodePackages.typescript-language-server
-    nodePackages.pyright
     nodejs
     unstable.python311
     unstable.python311Packages.notebook
-    unstable.python311Packages.ruff-lsp
     elmPackages.elm-language-server
     elmPackages.elm-review
     elmPackages.elm-format
     elmPackages.elm
-    swiProlog
+    swi-prolog
     unstable.vscode
     distrobox
     unzip
     gnumake
-    gcc
+    unstable.llvmPackages_18.clang
+    unstable.llvmPackages_18.clang-tools
+    unstable.lld_18
+    unstable.llvmPackages_18.stdenv
+    unstable.llvmPackages_18.llvm
+    unstable.llvmPackages_18.libcxx
     openjdk
     racket
     unstable.curl
@@ -66,7 +73,6 @@
     gdb
     lazygit
     nasm
-    clang-tools_16
     hexyl
     imhex
     unstable.eza
@@ -77,11 +83,15 @@
     ocamlPackages.ocaml-lsp
     ocamlPackages.ocamlformat
     ocamlPackages.utop
-    ghostty
     unstable.cargo
     unstable.rustc
     unstable.rustfmt
     unstable.rust-analyzer
+    unstable.tailscale
+    unstable.ruff
+    unstable.tailwindcss-language-server
+    unstable.jujutsu
+    iperf
   ];
 
 
@@ -91,8 +101,10 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      name = "Tokyonight-Dark-Storm";
+      package = pkgs.tokyonight-gtk-theme.override {
+        tweakVariants = ["storm"];
+      };
     };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
@@ -116,9 +128,10 @@
         mod = "Mod4";
       in lib.mkOptionDefault {
         "${mod}+q" = "kill";
-        "${mod}+f" = "exec firefox-devedition";
+        "${mod}+f" = "exec firefox-developer-edition";
         "${mod}+c" = "exec chromuim";
         "${mod}+y" = "exec grim -g \"$(slurp)\" - | wl-copy";
+        "${mod}+Shift+y" = "wf-recorder -g \"$(slurp)\" -x yuv420p --file=$(date \"+%s\").mp4";
         "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
         "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";

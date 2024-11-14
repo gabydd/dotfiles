@@ -5,5 +5,5 @@ font-size = 16
 gtk-single-instance = true
 gtk-titlebar = false
 window-padding-y = 0
-window-theme = dark
+window-theme = ghostty
 confirm-close-surface = false

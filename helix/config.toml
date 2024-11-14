@@ -4,6 +4,10 @@ auto-save = true
 mouse = false
 cursorline = true
 true-color = true
+end-of-line-diagnostics = "hint"
+[editor.inline-diagnostics]
+cursor-line = "warning"
+other-lines = "disable"
 
 [editor.soft-wrap]
 enable = true

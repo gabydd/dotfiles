@@ -11,15 +11,15 @@ file-types = ["pm", "t"]
 
 [[language]]
 name = "python"
-language-servers = ["pyright", "ruff"]
+language-servers = ["ruff"]
 
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
 
 [language-server.ruff]
-command = "ruff-lsp"
-config = { settings = { run = "onSave" } }
+command = "ruff"
+args = ["server", "--preview"]
 
 [language-server.jdtls]
 command = "jdt-language-server"

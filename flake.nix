@@ -1,21 +1,28 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     unstable.url = "nixpkgs/nixos-unstable";
     edge.url = "nixpkgs";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     helix = {
-      url = "github:the-mikedavis/helix/driver";
+      url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ghostty = {
-      url = "git+ssh://git@github.com/mitchellh/ghostty";
+      url = "git+ssh://git@github.com/ghostty-org/ghostty";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+    };
+    zig.url = "github:mitchellh/zig-overlay";
+    zls.url = "github:zigtools/zls";
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = {self, nixpkgs, home-manager, helix, ghostty, ... }@inputs: 
+  outputs = {self, nixpkgs, home-manager, helix, ghostty, nixos-cosmic, zig, zls, ... }@inputs: 
   let
     system = "x86_64-linux";
     pkgs-unstable = import inputs.unstable { config.allowUnfree = true; system = system; };
@@ -26,6 +33,8 @@
           helix.overlays.default
           (_final: _prev: {
             ghostty = ghostty.packages.${system}.default;
+            zig = zig.packages.${system}.default;
+            zls = zls.packages.${system}.default;
           })
           (_final: _prev: {
             unstable = pkgs-unstable;

@@ -132,6 +132,10 @@ in {
   #     "*/1 * * * * root /home/gaby/src/scripts/ddns"
   #   ];
   # };
+  services.tailscale = {
+    enable = true;
+    package = pkgs.unstable.tailscale;
+  };
   environment.systemPackages = with pkgs; [
     helix
     cachix
@@ -146,6 +150,7 @@ in {
     inetutils
     unstable.nil
     gnupg
+    tailscale
   ];
   environment.variables.EDITOR = "hx";
   nixpkgs.config.allowUnfree = true;

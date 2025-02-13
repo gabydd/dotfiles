@@ -5,6 +5,12 @@ mouse = false
 cursorline = true
 true-color = true
 end-of-line-diagnostics = "hint"
+[editor.persistence]
+old-files = true
+commands = true
+search = true
+clipboard = true
+
 [editor.inline-diagnostics]
 cursor-line = "warning"
 other-lines = "disable"

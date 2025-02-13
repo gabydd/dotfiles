@@ -2,12 +2,11 @@
 {
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
-    ghostty
+    pop-launcher
     platformio
     zig
     zls
     helix
-    typst-lsp
     typst
     typstfmt
     unstable.cachix
@@ -20,7 +19,7 @@
     imagemagick
     playonlinux
     hunspell
-    libreoffice-fresh
+    libreoffice
     wget
     swaylock
     wl-clipboard
@@ -40,8 +39,7 @@
     dmenu
     nodePackages.typescript-language-server
     nodejs
-    unstable.python311
-    unstable.python311Packages.notebook
+    unstable.python3
     elmPackages.elm-language-server
     elmPackages.elm-review
     elmPackages.elm-format
@@ -51,12 +49,15 @@
     distrobox
     unzip
     gnumake
-    unstable.llvmPackages_18.clang
-    unstable.llvmPackages_18.clang-tools
-    unstable.lld_18
-    unstable.llvmPackages_18.stdenv
-    unstable.llvmPackages_18.llvm
-    unstable.llvmPackages_18.libcxx
+    unstable.llvmPackages_19.clang
+    unstable.llvmPackages_19.clang-unwrapped.dev
+    unstable.llvmPackages_19.clang-tools
+    unstable.lld_19
+    unstable.lld_19.dev
+    unstable.llvmPackages_19.stdenv
+    unstable.llvmPackages_19.llvm
+    unstable.llvmPackages_19.llvm.dev
+    unstable.llvmPackages_19.libcxx
     openjdk
     racket
     unstable.curl
@@ -92,6 +93,10 @@
     unstable.tailwindcss-language-server
     unstable.jujutsu
     iperf
+    tinymist
+    niri
+    fuzzel
+    qemu
   ];
 
 
@@ -110,12 +115,19 @@
       gtk-application-prefer-dark-theme = true;
     };
   };
+  home.pointerCursor = {
+    package = pkgs.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 16;
+    gtk.enable = true;
+    x11.enable = true;
+  };
   wayland.windowManager.sway = {
     enable = true; 
     wrapperFeatures.gtk = true;
     config = {
       modifier = "Mod4";
-      terminal = "ghostty"; 
+      terminal = "/home/gaby/src/ghostty-wayland/zig-out/bin/ghostty-wayland"; 
       bars = [];
       window = {
         titlebar = false;
@@ -127,6 +139,7 @@
       keybindings = let
         mod = "Mod4";
       in lib.mkOptionDefault {
+        "${mod}+m" = "exec '/home/gaby/src/ghostty-wayland/zig-out/bin/ghostty-wayland --title=vaxis-launcher -e /home/gaby/src/vaxis-launcher/zig-out/bin/vaxis-launcher'";
         "${mod}+q" = "kill";
         "${mod}+f" = "exec firefox-developer-edition";
         "${mod}+c" = "exec chromuim";
@@ -145,6 +158,7 @@
       };
     };
     extraConfig = ''
+      for_window [title="^vaxis-launcher$" app_id="com.mitchellh.ghostty"] floating enable;
       default_border none
       bar swaybar_command waybar
     '';
@@ -153,10 +167,14 @@
   programs.waybar = {
     enable = true;
     style = pkgs.lib.readFile ./waybar/style.css;
+    systemd = {
+      enable = true;
+      target = "graphical-session.target";
+    };
     settings = [
       {
-        layer = "bottom";
-        modules-left = ["sway/workspaces"];
+        layer = "top";
+        modules-left = ["niri/window"];
         modules-center = ["clock"];
         modules-right = ["network" "cpu" "memory" "battery" "pulseaudio" "tray"];
         tray = {
@@ -248,7 +266,9 @@
     };
   };
   programs.fish.enable = true;
-  services.mako.enable = true;
+  services.mako = {
+    enable = true;
+  };
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;

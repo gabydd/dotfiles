@@ -69,7 +69,7 @@ output * bg ~/Pictures/base.png fill
     bindsym $mod+q kill
 
     # Start your launcher
-    bindsym $mod+m exec $menu
+    bindsym $mod+m exec 'ghostty --title="vaxis-launcher" -e /home/gaby/src/vaxis-launcher/zig-out/bin/vaxis-launcher'
     bindsym $mod+c exec google-chrome-stable
     bindsym $mod+f exec firefox-developer-edition
     bindsym $mod+o exec obsidian
@@ -208,6 +208,8 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+for_window [title="^vaxis-launcher$" app_id="com.mitchellh.ghostty"] floating enable;
 
 #
 # Status Bar:

@@ -7,6 +7,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "gabydd";
+  networking.firewall.allowedTCPPorts = [ 80 443 1212 ];
+  networking.firewall.allowedUDPPorts = [ 80 443 1212 ];
   networking.networkmanager.enable = true;
   programs.nm-applet.enable = true;
 
@@ -27,6 +29,12 @@
   programs.dconf.enable = true;
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark;
+  services.usbmuxd.enable = true;
+
+environment.systemPackages = with pkgs; [
+  libimobiledevice
+  ifuse # optional, to mount using 'ifuse'
+];
   
 
   users.users.gaby = {
@@ -44,6 +52,7 @@
       noto-fonts-cjk-sans
       font-awesome
       commit-mono
+      nerd-fonts.iosevka
       (pkgs.stdenvNoCC.mkDerivation rec {
         pname = "PixelCode";
         version = "2.2";
@@ -64,7 +73,6 @@
           runHook postInstall
         '';
       })
-      (nerdfonts.override { fonts = ["Iosevka"]; })
     ];
     enableDefaultPackages = true;
     fontconfig.defaultFonts = {
